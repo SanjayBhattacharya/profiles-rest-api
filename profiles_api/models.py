@@ -15,7 +15,7 @@ class UserProfileManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, name=name)
 
-        user.set_passwrd(password)
+        user.set_password(password)
         user.save(using=self._db)
 
         return user
@@ -34,7 +34,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Database model for users in the system"""
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     objects = UserProfileManager()
